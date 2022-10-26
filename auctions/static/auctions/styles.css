@@ -1,0 +1,55 @@
+body {
+    padding: 10px;
+}
+
+
+.auction-form > *{
+    padding: 1.5rem;
+    gap: 1.4rem;
+}
+
+.ditr{
+    display: flex;
+    justify-content: center;
+}
+
+.drrr{
+    display: flex;
+    justify-content: center;
+}
+
+
+.indexxr{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.cratt{
+    display: flex;
+    justify-content: center;
+}
+
+.fitr{
+    display : flex;
+    justify-content: space-between;
+    flex-basis: 1 1 100%
+}
+
+.fitr button{
+    display: flex;
+    margin: 0 0 0 295px;
+}
+
+.fitr ul{
+    display: flex;
+    margin: 0 0 0 195px;
+}
+
+.irre{
+    margin: 24px;
+}
+.ityyr{
+    margin:24px;
+}
+

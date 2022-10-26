@@ -1,0 +1,8 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if message %}
+    <h1>{{message}}</h1>
+<a href="{% url 'auction' %}">Try Again</a>
+{% endif %}
+{% endblock %}

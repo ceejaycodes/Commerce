@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block title%}
+Categories
+{% endblock %}
+
+{% block body %}
+<h1>Categories</h1>
+{% for mod in model %}
+<ul>
+  <a href="{%url 'category' title=mod %}"> <li> {{mod}}</li></a>
+</ul>
+{% endfor %}
+{% endblock %}

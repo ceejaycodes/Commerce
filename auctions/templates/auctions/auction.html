@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+Add Listing
+{% endblock %}
+
+
+<div class="ditr">
+    {% block body %}
+        <h3> Add Listing</h3>
+        <form class="auction-form" action= "{%url 'auction' %}" method="post">
+            <div class=" drrr form-row">
+                <div class="form-group col-md-6">
+                {% csrf_token %}
+                    {{form|crispy}}
+                    <br>
+                    <label for="bid">Starting Bid</label>
+                    <input class="form-control" style='margin: 0.4rem;'placeholder='price' name='bid'>
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Add Listing">  
+                </div>
+        </div>
+        </form>
+
+    {% endblock %}
+</div>

@@ -1,0 +1,106 @@
+{% extends "auctions/layout.html" %}
+
+{% block title%}
+Listing
+{% endblock %}
+
+{% block body %}
+
+{%if message %}
+<div class="alert alert-success" role="alert">
+  {{message}}
+</div>
+{% endif %}
+
+{%if failmessage %}
+<div class="alert alert-danger" role="alert">
+  {{failmessage}}
+</div>
+{% endif %}
+
+{% if active == False %}
+  {%if highestbidder == user %}
+  <div class="alert alert-success" role="alert">
+    You have won the auction!
+  </div>
+  {% endif %}
+{% endif %}
+
+<div class="irre">
+  {%if watching %}
+  <div>
+      <a href="{% url 'delwatchlist' model.id %}" class="btn btn-danger">Remove From Watchlist</a>
+  </div>
+  {% else %}
+  <div>
+      <a href="{% url 'addwatchlist' model.id %}" class="btn btn-primary">Add To Watchlist</a>
+  </div>
+  {% endif %}
+</div>
+
+
+
+<div class="cratt">
+    <div class="card" style="width: 38rem;">
+        <img class="card-img-top" src="{{model.image}}" alt="{{model.item}}" style="width:25rem">
+        <div class="card-body">
+        <strong><h2 class="card-title">{{model.item}}</h2></strong>
+        <h5 class="card-text">&#36;{{price}}</h5>
+        <p class="card-text">{{model.description}}</p>
+        <h4 class="card-text"><i>By</i> {{model.listed_by.username}}</h4>
+        <p class="card-text"> Category: {{model.category.name}}</p>
+        <p class="card-text"> Time listed: {{model.time_listed}}</p>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Bid
+          </button>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Place Bid</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{% url 'bid' model.id %}" method='post' >
+          <div class="modal-body">
+            {% csrf_token %}
+            {{bidform}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Bid</button>
+          </div>
+      </form>
+      </div>
+    </div>
+</div>
+{% if active  %}
+  {%if creator == user %}
+  <div>
+    <a href="{% url 'close' model.id %}" class="btn btn-success">Close Listing</a>
+  </div>
+  {% endif %}
+{% endif %}
+<h2>Comments</h2>
+<form action = "{% url 'comments' model.id %}" method='post'>
+  {% csrf_token %}
+  {{commentform}}
+  <button type="submit" class="btn btn-info">Comment</button>
+</form>
+{% if comment %}
+{% for com in comment %}
+<div class="ityyr card" style="width: 32rem;">
+  <div class="card-body">
+    <p class="card-text">{{com.comment}}</p>
+    <strong><P>{{com.author}}</p></strong>
+      <i><p>{{com.time}}</p></i>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

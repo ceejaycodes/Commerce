@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block title%}
+Watchlist
+{% endblock %}
+
+{% block body %}
+<h2>Watchlist</h2>
+<div class='indexxr'>
+        {% for mod in watch %}
+      <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{mod.image}}" alt="{{mod.item}}" style="width:200px">
+            <div class="card-body">
+              <h3 class="card-title">{{mod.item}}</h3>
+              <h5 class="card-text">&#36;{{mod.bid.price}}</h5>
+              <p class="card-text"> by {{mod.listed_by.username}}</p>
+              <a href="{% url 'auction1' mod.id %}" class="btn btn-primary">View Listing</a>
+            </div>
+        </div>
+       {% endfor %}
+  </div>
+{% endblock %}
